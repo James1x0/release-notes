@@ -1,14 +1,11 @@
-import { Application } from 'probot' // eslint-disable-line no-unused-vars
+import { Application } from 'probot';
+import commands from 'probot-commands';
 
-export = (app: Application) => {
-  app.on('pull_request.opened', async (context) => {
+export = (destroyAllHumans: Application) => {
+  commands(destroyAllHumans, 'releasenotes', async (context: any, command: any) => {
+    const milestoneName = command.arguments;
+
+    console.log('milestoneName', milestoneName);
     console.log(context.payload.pull_request);
-    // const issueComment = context.issue({ body: 'Thanks for opening this issue!' })
-    // await context.github.issues.createComment(issueComment)
-  })
-  // For more information on building apps:
-  // https://probot.github.io/docs/
-
-  // To get your app running against GitHub, see:
-  // https://probot.github.io/docs/development/
-}
+  });
+};
