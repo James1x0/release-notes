@@ -1,5 +1,5 @@
 import { Application } from 'probot';
-import commands from 'probot-commands'; // @ts-ignore
+import commands from 'probot-commands';
 
 export = (destroyAllHumans: Application) => {
   commands(destroyAllHumans, 'releasenotes', async (context: any, command: any) => {
