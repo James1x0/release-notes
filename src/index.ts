@@ -24,7 +24,7 @@ async function requestHandler (context: Context, command: any) {
   }));
 
 
-  const milestone = milestones.data.find((ms) => ms.title.toLowerCase().replace(/\w/g, '') === milestoneName.toLowerCase().replace(/\w/g, ''));
+  const milestone = milestones.data.find((ms) => ms.title.toLowerCase().replace(/\W/g, '') === milestoneName.toLowerCase().replace(/\W/g, ''));
 
   const prQuery = context.github.pulls.list.endpoint.merge(context.issue({
     state: 'closed',
