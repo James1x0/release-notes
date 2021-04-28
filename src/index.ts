@@ -38,7 +38,7 @@ async function requestHandler (context: Context, command: any) {
     for (let i = 0; i < response.data.length; i++) {
       const pr = response.data[i];
 
-      if (pr.body.toLowerCase().indexOf('[rn]') < 0 || pr.milestone.id !== (milestone || {}).id) {
+      if (pr.body.toLowerCase().indexOf('[rn]') < 0 || (pr.milestone || {}).id !== (milestone || {}).id) {
         continue;
       }
 
