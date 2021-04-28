@@ -27,16 +27,18 @@ async function requestHandler (context: Context, command: any) {
   const milestone = milestones.data.find((ms) => ms.title.toLowerCase().replace(/\W/g, '') === milestoneName.toLowerCase().replace(/\W/g, ''));
 
   const prQuery = context.github.pulls.list.endpoint.merge(context.issue({
-    state: 'closed',
+    state: 'closed'
   }));
 
   const releaseIssues: ReleaseIssue[] = [];
+
+  console.log('Milestone:', milestone);
 
   for await (const response of context.github.paginate.iterator(prQuery)) {
     for (let i = 0; i < response.data.length; i++) {
       const pr = response.data[i];
 
-      if (pr.body.toLowerCase().indexOf('[rn]') < 0) {
+      if (pr.body.toLowerCase().indexOf('[rn]') < 0 || pr.milestone.id !== (milestone || {}).id) {
         continue;
       }
 
